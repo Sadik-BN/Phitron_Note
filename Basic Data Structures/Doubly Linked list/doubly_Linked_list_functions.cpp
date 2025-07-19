@@ -82,8 +82,6 @@ void insert_at_any(Node *&head, Node *&tail, int pos, int val)
         Node *new_node = new Node(val);
         if (head == NULL)
         {
-            head = new_node;
-            tail = new_node;
             return;
         }
         Node *tmp = head;
@@ -247,4 +245,23 @@ int size(Node *head)
         head = head->next;
     }
     return count;
+}
+
+
+// --------------------------------------
+// Reverse Doubly Linked List
+// --------------------------------------
+
+void reverse_linked_list(Node* head , Node* tail)
+{
+    while(head->next != tail->next || head->prev != tail->prev)
+    {
+        swap(head->val,tail->val);
+        if(head->next == tail|| tail->prev == head)
+        {
+            break;
+        }
+        head=head->next;
+        tail=tail->prev;
+    }
 }

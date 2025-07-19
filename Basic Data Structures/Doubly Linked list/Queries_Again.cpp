@@ -1,30 +1,18 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-
-// ---------------------------
-// Doubly Linked List: Node Definition
-// ---------------------------
-
+#include<bits/stdc++.h>
+ using namespace std;
 class Node
 {
-public:
-    int val;
-    Node *next;
-    Node *prev;
+    public:
+        int val;
+        Node* next;
+        Node* prev;
     Node(int val)
     {
-        this->val = val;
-        this->next = NULL;
-        this->prev = NULL;
+        this->val=val;
+        this->next=NULL;
+        this->prev=NULL;
     }
 };
-
-
-// ---------------------------
-// Insertion Functions
-// ---------------------------
-
 void insert_at_head(Node *&head, Node *&tail, int val)
 {
     Node *new_node = new Node(val);
@@ -52,7 +40,7 @@ void insert_at_tail(Node *&head, Node *&tail, int val)
     new_node->prev = tail;
     tail = new_node;
 }
-void insert_at_any(Node *&head, Node *&tail, int pos, int val)
+void insert_at_any(Node *&head, Node *&tail, int pos, int val,bool &flag)
 {
     if (pos == 0)
     {
@@ -64,6 +52,8 @@ void insert_at_any(Node *&head, Node *&tail, int pos, int val)
         Node *new_node = new Node(val);
         if (head == NULL)
         {
+            cout<< "Invalid"<<endl;
+            flag=false;
             return;
         }
         Node *tmp = head;
@@ -72,6 +62,8 @@ void insert_at_any(Node *&head, Node *&tail, int pos, int val)
             tmp = tmp->next;
             if (tmp == NULL)
             {
+                cout<< "Invalid"<<endl;
+                flag=false;
                 return;
             }
         }
@@ -88,15 +80,11 @@ void insert_at_any(Node *&head, Node *&tail, int pos, int val)
     }
     else
     {
+        cout<< "Invalid"<<endl;
+        flag=false;
         return;
     }
 }
-
-
-// ---------------------------
-// Printing Functions
-// ---------------------------
-
 void print_dll_fwd(Node *head)
 {
 
@@ -114,42 +102,31 @@ void print_dll_rev(Node *tail)
         tail = tail->prev;
     }
 }
-
-
-// --------------------------------------
-// Other Doubly Linked List Functions
-// --------------------------------------
-int size(Node *head)
-{
-    int count = 0;
-    while (head != NULL)
-    {
-        count++;
-        head = head->next;
-    }
-    return count;
-}
-
 int main()
 {
-    // Node *head = new Node(10);
-    // Node *a = new Node(20);
-    // Node *b = new Node(30);
-    // Node *tail = new Node(40);
+    Node* head=NULL;
+    Node* tail = NULL;
 
-    // head->next = a;
-    // a->prev = head;
+    int q;
+    cin>>q;
 
-    // a->next = b;
-    // b->prev = a;
+    for(int i=1;i<=q;i++)
+    {
+        int x,v;
 
-    // b->next = tail;
-    // tail->prev = b;
-    Node *head=NULL,*tail=NULL;
+        cin>>x>>v;
+        bool flag=true;
+        insert_at_any(head,tail,x,v,flag);
 
-    insert_at_any(head, tail, 4, 100);
-
-    print_dll_fwd(head);
-
+        if(flag==true)
+        {
+            cout<<"L -> ";
+            print_dll_fwd(head);
+            cout<<endl;
+            cout<<"R -> ";
+            print_dll_rev(tail);
+            cout<<endl;
+        }
+    }
     return 0;
 }
