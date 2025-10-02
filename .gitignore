@@ -1,0 +1,9 @@
+# Competitive programming temporary files
+.cph
+
+# Binaries
+*.bin
+*.exe
+
+# Config / data files
+*.json
